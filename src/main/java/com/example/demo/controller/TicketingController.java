@@ -11,21 +11,25 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/ticket")
 public class TicketingController {
     @Autowired
- private TicketingService ticketingService;
+    private TicketingService ticketingService;
+
     @PostMapping("/insert")
-    public ResponseDto insert(@RequestBody TicketingDto ticketingDto){
-        return  ticketingService.insert(ticketingDto);
+    public ResponseDto insert(@RequestBody TicketingDto ticketingDto) {
+        return ticketingService.insert(ticketingDto);
     }
+
     @PutMapping("/update")
-    public  ResponseDto update(@RequestBody TicketingDto ticketingDto){
-        return  ticketingService.update(ticketingDto);
+    public ResponseDto update(@RequestBody TicketingDto ticketingDto) {
+        return ticketingService.update(ticketingDto);
     }
+
     @GetMapping("/all")
-    public ResponseDto allData(){
+    public ResponseDto allData() {
         return ticketingService.allData();
     }
+
     @DeleteMapping("/delete")
-    public ResponseDto delete(@RequestParam int id){
-        return  ticketingService.delete(id);
+    public ResponseDto delete(@RequestParam int id) {
+        return ticketingService.delete(id);
     }
 }

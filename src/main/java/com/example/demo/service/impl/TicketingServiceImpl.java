@@ -64,10 +64,17 @@ public class TicketingServiceImpl implements TicketingService {
     @Override
     public ResponseDto delete(int id) {
         ResponseDto responseDto=new ResponseDto();
+        try{
         ticketingRepository.deleteById(id);
         responseDto.setCode(200);
         responseDto.setMzg("Deleted data");
-        return responseDto;
+        return responseDto;}
+        catch (Exception e){
+            responseDto.setCode(404);
+            responseDto.setMzg("Not Deleted data");
+            return responseDto;
+
+        }
     }
 
     @Override
