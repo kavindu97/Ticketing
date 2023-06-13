@@ -32,4 +32,16 @@ public class TicketingController {
     public ResponseDto delete(@RequestParam int id) {
         return ticketingService.delete(id);
     }
+    @PutMapping("/status/{status}/{id}")
+    public ResponseDto updateIsSentEmail(@PathVariable String status,@PathVariable int id){
+        return  ticketingService.isEmail(status,id);
+    }
+    @PutMapping("/is-sent-message/{isSentMessage}/{id}")
+    public ResponseDto updateisSentMessage(@PathVariable String isSentMessage,@PathVariable int id){
+        return  ticketingService.isEmail(isSentMessage,id);
+    }
+    @PutMapping("/is-sent-email/{isSentEmail}/{id}")
+    public ResponseDto updateisSentMa(@PathVariable String isSentEmail,@PathVariable int id){
+        return  ticketingService.isEmail(isSentEmail,id);
+    }
 }

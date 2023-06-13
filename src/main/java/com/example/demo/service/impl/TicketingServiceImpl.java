@@ -15,11 +15,12 @@ import java.util.Optional;
 public class TicketingServiceImpl implements TicketingService {
     @Autowired
     private TicketingRepository ticketingRepository;
+
     @Override
     public ResponseDto insert(TicketingDto ticketingDto) {
-        ResponseDto responseDto=new ResponseDto();
-        Ticketing ticketing=new Ticketing();
-        try{
+        ResponseDto responseDto = new ResponseDto();
+        Ticketing ticketing = new Ticketing();
+        try {
             ticketing.setContactNumber(ticketingDto.getContactNumber());
             ticketing.setName(ticketingDto.getName());
             ticketing.setEmail(ticketingDto.getEmail());
@@ -31,18 +32,19 @@ public class TicketingServiceImpl implements TicketingService {
             responseDto.setCode(200);
             responseDto.setMzg("Insert data");
             return responseDto;
-        }catch (Exception e){
+        } catch (Exception e) {
             responseDto.setCode(500);
             responseDto.setMzg("Internal server error");
             return responseDto;
         }
     }
-    public ResponseDto update(TicketingDto ticketingDto){
-        ResponseDto responseDto =new ResponseDto();
+
+    public ResponseDto update(TicketingDto ticketingDto) {
+        ResponseDto responseDto = new ResponseDto();
         try {
-            Optional<Ticketing> optionalTicketing=ticketingRepository.findById(ticketingDto.getId());
-            if(optionalTicketing.isPresent()){
-                Ticketing ticketing=optionalTicketing.get();
+            Optional<Ticketing> optionalTicketing = ticketingRepository.findById(ticketingDto.getId());
+            if (optionalTicketing.isPresent()) {
+                Ticketing ticketing = optionalTicketing.get();
                 ticketing.setContactNumber(ticketingDto.getContactNumber());
                 ticketing.setName(ticketingDto.getName());
                 ticketing.setEmail(ticketingDto.getEmail());
@@ -53,29 +55,29 @@ public class TicketingServiceImpl implements TicketingService {
                 ticketingRepository.save(ticketing);
                 responseDto.setCode(200);
                 responseDto.setMzg("Updated data");
-                return  responseDto;
-            }else {
+                return responseDto;
+            } else {
                 responseDto.setCode(404);
                 responseDto.setMzg("user not found");
-                return  responseDto;
+                return responseDto;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             responseDto.setCode(500);
             responseDto.setMzg("Internal server error");
-            return  responseDto;
+            return responseDto;
 
         }
     }
 
     @Override
     public ResponseDto delete(int id) {
-        ResponseDto responseDto=new ResponseDto();
-        try{
-        ticketingRepository.deleteById(id);
-        responseDto.setCode(200);
-        responseDto.setMzg("Deleted data");
-        return responseDto;}
-        catch (Exception e){
+        ResponseDto responseDto = new ResponseDto();
+        try {
+            ticketingRepository.deleteById(id);
+            responseDto.setCode(200);
+            responseDto.setMzg("Deleted data");
+            return responseDto;
+        } catch (Exception e) {
             responseDto.setCode(500);
             responseDto.setMzg("Internal server error");
             return responseDto;
@@ -85,11 +87,63 @@ public class TicketingServiceImpl implements TicketingService {
 
     @Override
     public ResponseDto allData() {
-        ResponseDto responseDto=new ResponseDto();
-        List<Ticketing> all=ticketingRepository.findAll();
+        ResponseDto responseDto = new ResponseDto();
+        List<Ticketing> all = ticketingRepository.findAll();
         responseDto.setMzg("all data");
         responseDto.setCode(200);
         responseDto.setData(all);
         return responseDto;
+    }
+
+    public ResponseDto isEmail(String isSentEmail, int id) {
+        ResponseDto responseDto = new ResponseDto();
+        Optional<Ticketing> optionalTicketing = ticketingRepository.findById(id);
+        if (optionalTicketing.isPresent()) {
+            Ticketing ticketing = optionalTicketing.get();
+            ticketing.setIsSentEmail(isSentEmail);
+            ticketingRepository.save(ticketing);
+            responseDto.setCode(200);
+            responseDto.setMzg("updated isSentEmail");
+            return responseDto;
+        } else {
+            responseDto.setCode(404);
+            responseDto.setMzg("User not found");
+            return responseDto;
+        }
+
+    }
+
+    public ResponseDto isMessage(String isSentMessage, int id) {
+        ResponseDto responseDto = new ResponseDto();
+        Optional<Ticketing> optionalTicketing = ticketingRepository.findById(id);
+        if (optionalTicketing.isPresent()) {
+            Ticketing ticketing = optionalTicketing.get();
+            ticketing.setIsSentMessage(isSentMessage);
+            ticketingRepository.save(ticketing);
+            responseDto.setCode(200);
+            responseDto.setMzg("updated isMessage");
+            return responseDto;
+        } else {
+            responseDto.setCode(404);
+            responseDto.setMzg("User not found");
+            return responseDto;
+        }
+    }
+
+    public ResponseDto status(String status, int id) {
+        ResponseDto responseDto = new ResponseDto();
+        Optional<Ticketing> optionalTicketing = ticketingRepository.findById(id);
+        if (optionalTicketing.isPresent()) {
+            Ticketing ticketing = optionalTicketing.get();
+            ticketing.setStatus(status);
+            ticketingRepository.save(ticketing);
+            responseDto.setCode(200);
+            responseDto.setMzg("updated status");
+            return responseDto;
+        } else {
+            responseDto.setCode(404);
+            responseDto.setMzg("User not found");
+            return responseDto;
+        }
     }
 }
