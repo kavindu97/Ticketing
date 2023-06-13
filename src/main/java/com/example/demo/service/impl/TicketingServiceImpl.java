@@ -24,6 +24,9 @@ public class TicketingServiceImpl implements TicketingService {
             ticketing.setName(ticketingDto.getName());
             ticketing.setEmail(ticketingDto.getEmail());
             ticketing.setStudentId(ticketingDto.getStudentId());
+            ticketing.setIsSentEmail(ticketingDto.getIsSentEmail());
+            ticketing.setStatus(ticketingDto.getStatus());
+            ticketing.setIsSentMessage(ticketingDto.getIsSentMessage());
             ticketingRepository.save(ticketing);
             responseDto.setCode(200);
             responseDto.setMzg("Insert data");
@@ -44,6 +47,9 @@ public class TicketingServiceImpl implements TicketingService {
                 ticketing.setName(ticketingDto.getName());
                 ticketing.setEmail(ticketingDto.getEmail());
                 ticketing.setStudentId(ticketingDto.getStudentId());
+                ticketing.setIsSentMessage(ticketingDto.getIsSentMessage());
+                ticketing.setIsSentEmail(ticketingDto.getIsSentEmail());
+                ticketing.setStatus(ticketingDto.getStatus());
                 ticketingRepository.save(ticketing);
                 responseDto.setCode(200);
                 responseDto.setMzg("Updated data");
@@ -70,8 +76,8 @@ public class TicketingServiceImpl implements TicketingService {
         responseDto.setMzg("Deleted data");
         return responseDto;}
         catch (Exception e){
-            responseDto.setCode(404);
-            responseDto.setMzg("Not Deleted data");
+            responseDto.setCode(500);
+            responseDto.setMzg("Internal server error");
             return responseDto;
 
         }

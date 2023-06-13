@@ -22,4 +22,7 @@ public class TicketingDto {
     private String contactNumber;
 
     private String email;
+    private String isSentEmail;
+    private String isSentMessage;
+    private String status;
 }
