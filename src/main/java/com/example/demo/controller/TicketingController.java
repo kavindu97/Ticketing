@@ -33,7 +33,7 @@ public class TicketingController {
         return ticketingService.delete(id);
     }
     @PutMapping("/status/{status}/{id}")
-    public ResponseDto updateIsSentEmail(@PathVariable String status,@PathVariable int id){
+    public ResponseDto updateStatus(@PathVariable String status,@PathVariable int id){
         return  ticketingService.status(status,id);
     }
     @PutMapping("/is-sent-message/{isSentMessage}/{id}")
@@ -41,7 +41,7 @@ public class TicketingController {
         return  ticketingService.isMessage(isSentMessage,id);
     }
     @PutMapping("/is-sent-email/{isSentEmail}/{id}")
-    public ResponseDto updateisSentMa(@PathVariable String isSentEmail,@PathVariable int id){
+    public ResponseDto updateisSentEmail(@PathVariable String isSentEmail,@PathVariable int id){
         return  ticketingService.isEmail(isSentEmail,id);
     }
 }
